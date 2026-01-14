@@ -202,66 +202,26 @@ film -> inventory -> rental
 Запрос может быть таким:
 
 ```
-SELECT
-    f.film_id,
-    f.title
-FROM film f
-LEFT JOIN inventory i
-    ON i.film_id = f.film_id
+select
+	i.inventory_id,
+    i.film_id,
+    f.title,
+    r.rental_id  
+FROM inventory i
 LEFT JOIN rental r
     ON r.inventory_id = i.inventory_id
-WHERE r.rental_id IS NULL;
+left join film f 
+	on f.film_id = i.film_id 
+WHERE r.rental_id IS null;
 ```
 
 Результат запроса:
 
-<img width="405" height="674" alt="sakila_12-4-5" src="https://github.com/user-attachments/assets/7c97b43d-029a-4cb9-8c9a-1357abe3251d" />
+<img width="603" height="346" alt="sakila_12-4-5" src="https://github.com/user-attachments/assets/75269ba3-3acf-4d10-875c-87fbe24a2101" />
 
 ```
-|film_id|title                 |
-|-------|----------------------|
-|1      |ACADEMY DINOSAUR      |
-|14     |ALICE FANTASIA        |
-|33     |APOLLO TEEN           |
-|36     |ARGONAUTS TOWN        |
-|38     |ARK RIDGEMONT         |
-|41     |ARSENIC INDEPENDENCE  |
-|87     |BOONDOCK BALLROOM     |
-|108    |BUTCH PANTHER         |
-|128    |CATCH AMISTAD         |
-|144    |CHINATOWN GLADIATOR   |
-|148    |CHOCOLATE DUCK        |
-|171    |COMMANDMENTS EXPRESS  |
-|192    |CROSSING DIVORCE      |
-|195    |CROWDS TELEMARK       |
-|198    |CRYSTAL BREAKING      |
-|217    |DAZED PUNK            |
-|221    |DELIVERANCE MULHOLLAND|
-|318    |FIREHOUSE VIETNAM     |
-|325    |FLOATS GARDEN         |
-|332    |FRANKENSTEIN STRANGER |
-|359    |GLADIATOR WESTWARD    |
-|386    |GUMP DATE             |
-|404    |HATE HANDICAP         |
-|419    |HOCUS FRIDA           |
-|495    |KENTUCKIAN GIANT      |
-|497    |KILL BROTHERHOOD      |
-|607    |MUPPET MILE           |
-|642    |ORDER BETRAYED        |
-|669    |PEARL DESTINY         |
-|671    |PERDITION FARGO       |
-|701    |PSYCHO SHRUNK         |
-|712    |RAIDERS ANTITRUST     |
-|713    |RAINBOW SHOCK         |
-|742    |ROOF CHAMPION         |
-|801    |SISTER FREDDY         |
-|802    |SKY MIRACLE           |
-|860    |SUICIDES SILENCE      |
-|874    |TADPOLE PARK          |
-|909    |TREASURE COMMAND      |
-|943    |VILLAIN DESPERATE     |
-|950    |VOLUME HOUSE          |
-|954    |WAKE JAWS             |
-|955    |WALLS ARTIST          |
+inventory_id|film_id|title           |rental_id|
+------------+-------+----------------+---------+
+           5|      1|ACADEMY DINOSAUR|         |
 ```
 ---
